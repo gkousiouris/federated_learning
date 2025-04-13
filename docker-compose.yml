@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  syft_node_datasite:
+    image: tsadimas/humaine-pysyft
+    container_name: syft_node_datasite
+    environment:
+      - DOMAIN_NAME=datasite
+      - PORT=8889
+    ports:
+      - "8889:8888"
+      - "8081:8080"
+    networks:
+      - syft-net
+
+  syft_node_client:
+    image: tsadimas/humaine-pysyft
+    container_name: syft_node_client
+    environment:
+      - DOMAIN_NAME=client
+      - PORT=8890
+    ports:
+      - "8890:8888"
+      - "8082:8080"
+    networks:
+      - syft-net
+
+networks:
+  syft-net:
+    driver: bridge
